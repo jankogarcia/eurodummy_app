@@ -8,6 +8,7 @@ state = {
     goalsAgainst:null,
     minute:null,
     ourgoals:null,
+    totalminutes:90,
     calculationData:null
 }
 
@@ -22,6 +23,9 @@ updateState = (field, element) => {
         case 'ourgoals':
             this.setState({ourgoals:element.target.value});
             break;
+        case 'totalminutes':
+            this.setState({totalminutes:element.target.value});
+            break;
         default:
             break;
     }
@@ -31,8 +35,9 @@ fetchCalculation = () => {
     var goalsAgainst = this.state.goalsAgainst;
     var minute = this.state.minute;
     var ourGoals = this.state.ourgoals;
+    var totalMinutes = this.state.totalminutes;
 
-    var response = getGoals(goalsAgainst, minute, ourGoals);
+    var response = getGoals(goalsAgainst, minute, ourGoals, totalMinutes);
     
     this.setState({
         calculationData: response
@@ -88,6 +93,17 @@ renderPage = () => (
             onChange={(element) => this.updateState('ourgoals', element)} />
             <span className="field__label-wrap">
                 <span className="field__label"># of out goals</span>
+            </span>
+        </label>
+
+        <label className="field field_v1">
+            <input 
+            type='number' 
+            className="field__input" 
+            placeholder="total minutes"
+            onChange={(element) => this.updateState('totalminutes', element)} />
+            <span className="field__label-wrap">
+                <span className="field__label">extra time?</span>
             </span>
         </label>
         <br />

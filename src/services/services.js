@@ -12,8 +12,8 @@ exports.getBeers = function getBeers(howmany){
     }
 }
 
-exports.getGoals = function getGoals(goalsAgainst, minute, ourgoals){
-    var minutesLeft = 90 - minute;
+exports.getGoals = function getGoals(goalsAgainst, minute, ourgoals, totalMinutes){
+    var minutesLeft = (totalMinutes || 90) - minute;
 	var goalsNeeded = parseInt(goalsAgainst) - parseInt(ourgoals) + 1;
 	var res = minutesLeft / goalsNeeded; 
 	return  {

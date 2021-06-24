@@ -3,8 +3,10 @@ const config = require('./config/config').get(process.env.NODE_ENV);
 
 const app = express();
 
-const getGoals = (goalsAgainst, minute, ourgoals) => {
-    var minutesLeft = 90 - minute;
+const getGoals = (goalsAgainst, minute, ourgoals, totalMinutes) => {
+    var minutesLeft = (totalMinutes || 90) - minute;
+    console.log(totalMinutes);
+    console.log(minutesLeft);
 	var goalsNeeded = parseInt(goalsAgainst) - parseInt(ourgoals) + 1;
 	var res = minutesLeft / goalsNeeded; 
 	return  {
@@ -15,11 +17,12 @@ const getGoals = (goalsAgainst, minute, ourgoals) => {
 }
 
 const getGoalsCalc = (req, res) => {
-    //?goalsagainst=3&minute=32&ourgoals=2
+    //?goalsagainst=3&minute=32&ourgoals=2&totalminutes=97
     var goalsAgainst = req.query.goalsagainst;
     var minute = req.query.minute;
     var ourGoals = req.query.ourgoals;
-    var answer = getGoals(goalsAgainst, minute, ourGoals);
+    var totalMinutes = req.query.totalminutes;
+    var answer = getGoals(goalsAgainst, minute, ourGoals, totalMinutes);
     return res.status(200).send(answer);
 }
 
