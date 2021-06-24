@@ -37,11 +37,15 @@ fetchCalculation = () => {
     var ourGoals = this.state.ourgoals;
     var totalMinutes = this.state.totalminutes;
 
-    var response = getGoals(goalsAgainst, minute, ourGoals, totalMinutes);
+    if(goalsAgainst !== null && minute !== null && ourGoals != null)
+    {
+        var response = getGoals(goalsAgainst, minute, ourGoals, totalMinutes);
     
-    this.setState({
-        calculationData: response
-    });
+        this.setState({
+            calculationData: response
+        });
+    }
+    
     // axios.get(`/api/match?goalsagainst=${goalsAgainst}&minute=${minute}&ourgoals=${ourGoals}`)
     // .then(response => {
     //     console.log(response.data);
@@ -57,6 +61,8 @@ renderResults = () => {
         <p>Minutes Left:{this.state.calculationData.minutesLeft}</p>
         <p>Goals Needed:{this.state.calculationData.goalsNeeded}</p>
         <p>Each {this.state.calculationData.eachMinutesAGoalIsNeeded} minute(s) we need a goal!!</p>
+        <h3>Meantime help yourself with these:</h3>
+        <h1>{this.state.calculationData.beers.beers}</h1>
     </div>
     : null
 }
@@ -92,7 +98,7 @@ renderPage = () => (
             placeholder="drop # of our goals"
             onChange={(element) => this.updateState('ourgoals', element)} />
             <span className="field__label-wrap">
-                <span className="field__label"># of out goals</span>
+                <span className="field__label"># of our goals</span>
             </span>
         </label>
 

@@ -10,6 +10,12 @@ p {
     font-family: 'Montserrat', sans-serif;
 }
 
+h3 {
+  margin:0;
+  padding:0;
+  color:#673AB7;
+}
+
 .button {
     background-color: rgb(29, 204, 216);
     border: none;

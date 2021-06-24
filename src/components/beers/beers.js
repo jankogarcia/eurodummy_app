@@ -23,6 +23,7 @@ class Beers extends Component {
     
     getBeers = () => {
         var numberofbeers = this.state.howManyBeers;
+        numberofbeers = Math.abs(Math.floor(numberofbeers));
         var response = getBeers(numberofbeers);
         this.setState({
             beersData:response
